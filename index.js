@@ -119,6 +119,9 @@ app.get('/read1',(req,res)=>{
   
 });
   
+app.get('/',(req,res)=>{
+  res.send('work')
+})
 app.listen(process.env.PORT || 3001,()=>{
     console.log('running an');
 })
