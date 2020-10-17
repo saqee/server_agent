@@ -13,7 +13,7 @@ app.use(express.json())
 app.use(express.static('services'))
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(fileUpload())
-
+require('dotenv').config()
 
 
 //mongoose.connect('mongodb+srv://saqeeb:saqeeb@cluster0.euyqv.mongodb.net/service1?retryWrites=true&w=majority',{
@@ -25,7 +25,7 @@ app.use(fileUpload())
 
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://saqeeb:saqeeb@cluster0.euyqv.mongodb.net/work?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster0.euyqv.mongodb.net/${process.env.DB_DbName1}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("work").collection("works");
@@ -56,7 +56,7 @@ app.get('/read',(req,res)=>{
 });
 
 
-const uri2 = "mongodb+srv://saqeeb:saqeeb@cluster0.euyqv.mongodb.net/company?retryWrites=true&w=majority";
+const uri2 = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster0.euyqv.mongodb.net/${process.env.DB_DbName2}?retryWrites=true&w=majority`;
 
 client.connect(err => {
   const companies = client.db("company").collection("companies");
@@ -88,7 +88,8 @@ client.connect(err => {
 });
 //adminpanel
 
-const uri3 = "mongodb+srv://saqeeb:saqeeb@cluster0.euyqv.mongodb.net/adminpanel?retryWrites=true&w=majority";
+const uri3 = `mongodb+srv://${process.env.DB_User}:${process.env.DB_Pass}@cluster0.euyqv.mongodb.net/${process.env.DB_DbName3}?retryWrites=true&w=majority`;
+
 const client3 = new MongoClient(uri3, { useNewUrlParser: true });
 client3.connect(err => {
   const collection = client3.db("adminpanel").collection("adminpanels");
